@@ -10,5 +10,6 @@ class LazyService(LazyObject):
 
     def _setup(self):
         service = getattr(settings, self._setting_name)
-        assert "services" in service, service
+        if "service" in service:
+            assert "services" in service, service
         self._wrapped = import_string(service)()
